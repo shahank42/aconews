@@ -4,32 +4,34 @@ import { Badge } from '@/components/ui/badge'
 import { Clock } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { ArrowRight } from 'lucide-react'
-import type { mockArticles } from './news-feed'
 import Image from 'next/image'
+import type { Article } from '@/lib/types'
+import placeholderImage from "../../public/placeholder.svg"
 
-export default function NewsCard({ article }: { article: typeof mockArticles[0] }) {
+export default function NewsCard({ article }: { article: Article }) {
   return (
-    <Card key={article.id} className="overflow-hidden">
+    <Card className="overflow-hidden">
       <div className="md:flex">
         <div className="md:w-1/3">
           <Image
-            src={article.image}
+            src={placeholderImage}
+            loader={() => article.image}
             alt={article.title}
             className="object-cover w-full h-48 md:h-full"
           />
         </div>
         <div className="flex flex-col p-6 md:w-2/3">
           <CardHeader className="flex flex-col p-0">
-            <Badge className="self-start mb-2">{article.category}</Badge>
+            {/* <Badge className="self-start mb-2">{article.source.name}</Badge> */}
             <h3 className="mb-2 text-xl font-bold">{article.title}</h3>
           </CardHeader>
           <CardContent className="flex flex-col flex-grow p-0">
-            <p className="mb-4 text-muted-foreground">{article.excerpt}</p>
+            <p className="mb-4 text-muted-foreground">{article.content.slice(0, 100)}</p>
             <div className="flex items-center mb-4 text-sm text-muted-foreground">
               <Clock className="w-4 h-4 mr-1" />
-              <time dateTime={article.date}>{article.date}</time>
+              <time dateTime={article.publishedAt}>{article.publishedAt}</time>
               <span className="mx-2">•</span>
-              <span>{article.source}</span>
+              <span>{article.source.name}</span>
             </div>
           </CardContent>
           <CardFooter className="p-0 mt-auto">
