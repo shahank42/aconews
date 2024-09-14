@@ -5,13 +5,14 @@ import { Clock } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { ArrowRight } from 'lucide-react'
 import type { mockArticles } from './news-feed'
+import Image from 'next/image'
 
 export default function NewsCard({ article }: { article: typeof mockArticles[0] }) {
   return (
     <Card key={article.id} className="overflow-hidden">
       <div className="md:flex">
         <div className="md:w-1/3">
-          <img
+          <Image
             src={article.image}
             alt={article.title}
             className="object-cover w-full h-48 md:h-full"
