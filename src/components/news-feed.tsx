@@ -7,13 +7,15 @@ import { useState } from "react";
 import { Skeleton } from "./ui/skeleton";
 import { PaginationSection } from "./pagination-section";
 import { fetchArticles } from "@/lib/fetchers";
+import { useSearchParams } from "next/navigation";
 
 export default function NewsFeed() {
-  const [currentPage, setCurrentPage] = useState(1);
-
+  const searchParams = useSearchParams();
+  const [currentPage, setCurrentPage] = useState(Number(searchParams.get('page')) || 1);
+  const [pageSize, setPageSize] = useState(Number(searchParams.get('pageSize')) || 2);
   const { isPending, isError, data, error, isPlaceholderData } = useQuery({
-    queryKey: ['articles', currentPage],
-    queryFn: () => fetchArticles(currentPage),
+    queryKey: ['articles', currentPage, pageSize],
+    queryFn: () => fetchArticles(currentPage, pageSize),
     placeholderData: keepPreviousData
   })
 
@@ -28,12 +30,6 @@ export default function NewsFeed() {
 
   if (isError) return <div className="flex flex-col gap-6 p-4">Error: {error.message}</div>;
 
-  const handlePageChange = (newPage: number) => {
-    if (newPage >= 1 && newPage <= data.totalPages) {
-      setCurrentPage(newPage);
-    }
-  };
-
   return (
     <div className="flex flex-col gap-6 p-4">
       {data.articles.map((article) => (
@@ -41,13 +37,15 @@ export default function NewsFeed() {
       ))}
 
       <PaginationSection
-        currentPage={currentPage}
-        totalPages={data.totalPages}
-        onPageChange={handlePageChange}
-        hasNextPage={data.hasNextPage}
-        hasPreviousPage={data.hasPreviousPage}
-        isPlaceholderData={isPlaceholderData}
+        totalCount={data.totalPages * pageSize}
+        page={currentPage}
+        pageSize={pageSize}
+      // pageSizeSelectOptions={{
+      //   pageSizeSearchParam: 'pageSize',
+      //   pageSizeOptions: [2, 4, 6]
+      // }}
       />
+
     </div>
   );
 }

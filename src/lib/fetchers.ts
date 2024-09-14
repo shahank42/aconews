@@ -1,6 +1,6 @@
 import type { PaginatedArticles } from "./types";
 
-export const fetchArticles = async (page: number) => {
+export const fetchArticles = async (page: number, pageSize: number) => {
 	const baseUrl = `${process.env.NEXT_PUBLIC_BACKEND_URL}/news`;
 	if (!baseUrl) {
 		throw new Error("NEXT_PUBLIC_BACKEND_URL is not defined");
@@ -11,7 +11,7 @@ export const fetchArticles = async (page: number) => {
 		country: "us",
 		language: "en",
 		page: page.toString(),
-		pageSize: "2",
+		pageSize: pageSize.toString(),
 	});
 
 	try {
