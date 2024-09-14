@@ -1,15 +1,20 @@
+import type { FilterFormValues } from "@/components/filters";
 import type { PaginatedArticles } from "./types";
 
-export const fetchArticles = async (page: number, pageSize: number) => {
+export const fetchArticles = async (
+	page: number,
+	pageSize: number,
+	filters: FilterFormValues,
+) => {
 	const baseUrl = `${process.env.NEXT_PUBLIC_BACKEND_URL}/news`;
 	if (!baseUrl) {
 		throw new Error("NEXT_PUBLIC_BACKEND_URL is not defined");
 	}
 
 	const params = new URLSearchParams({
-		category: "general",
-		country: "us",
-		language: "en",
+		category: filters.category || "general",
+		country: filters.country || "us",
+		language: filters.language || "en",
 		page: page.toString(),
 		pageSize: pageSize.toString(),
 	});
