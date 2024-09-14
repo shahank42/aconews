@@ -26,100 +26,26 @@ export function PaginationSection({
   hasPreviousPage,
   isPlaceholderData
 }: PaginationSectionProps) {
-  const renderPageNumbers = () => {
-    const pageNumbers = [];
-    const maxVisiblePages = 5;
-
-    if (totalPages <= maxVisiblePages) {
-      for (let i = 1; i <= totalPages; i++) {
-        pageNumbers.push(
-          <PaginationItem key={`page-${i}`}>
-            <PaginationLink
-              href="#"
-              onClick={() => onPageChange(i)}
-              isActive={currentPage === i}
-            >
-              {i}
-            </PaginationLink>
-          </PaginationItem>
-        );
-      }
-    } else {
-      // Always show first page
-      pageNumbers.push(
-        <PaginationItem key="page-1">
-          <PaginationLink
-            href="#"
-            onClick={() => onPageChange(1)}
-            isActive={currentPage === 1}
-          >
-            1
-          </PaginationLink>
-        </PaginationItem>
-      );
-
-      // Show ellipsis if needed
-      if (currentPage > 3) {
-        pageNumbers.push(
-          <PaginationItem key="ellipsis-start">
-            <PaginationEllipsis />
-          </PaginationItem>
-        );
-      }
-
-      // Show current page and surrounding pages
-      const start = Math.max(2, currentPage - 1);
-      const end = Math.min(totalPages - 1, currentPage + 1);
-      for (let i = start; i <= end; i++) {
-        pageNumbers.push(
-          <PaginationItem key={`page-${i}`}>
-            <PaginationLink
-              href="#"
-              onClick={() => onPageChange(i)}
-              isActive={currentPage === i}
-            >
-              {i}
-            </PaginationLink>
-          </PaginationItem>
-        );
-      }
-
-      // Show ellipsis if needed
-      if (currentPage < totalPages - 2) {
-        pageNumbers.push(
-          <PaginationItem key="ellipsis-end">
-            <PaginationEllipsis />
-          </PaginationItem>
-        );
-      }
-
-      // Always show last page
-      pageNumbers.push(
-        <PaginationItem key={`page-${totalPages}`}>
-          <PaginationLink
-            href="#"
-            onClick={() => onPageChange(totalPages)}
-            isActive={currentPage === totalPages}
-          >
-            {totalPages}
-          </PaginationLink>
-        </PaginationItem>
-      );
-    }
-
-    return pageNumbers;
-  };
 
   return (
-    <Pagination>
-      <PaginationContent>
+    <Pagination className="w-full">
+      <PaginationContent className='w-full'>
         <PaginationItem>
           <PaginationPrevious
             onClick={() => onPageChange(currentPage - 1)}
             isActive={!isPlaceholderData && hasPreviousPage}
           />
         </PaginationItem>
-        {renderPageNumbers()}
+        {Array.from({ length: totalPages }, (_, i) => (
+          <PaginationItem key={`page-${i + 1}`}>
+            <PaginationLink
+              onClick={() => onPageChange(i + 1)}
+              isActive={currentPage === i + 1}
+            >
+              {i + 1}
+            </PaginationLink>
+          </PaginationItem>
+        ))}
         <PaginationItem>
           <PaginationNext
             onClick={() => onPageChange(currentPage + 1)}

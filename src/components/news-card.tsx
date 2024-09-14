@@ -12,12 +12,13 @@ export default function NewsCard({ article }: { article: Article }) {
   return (
     <Card className="overflow-hidden">
       <div className="md:flex">
-        <div className="md:w-1/3">
+        <div className="md:w-1/3 h-64 relative">
           <Image
             src={placeholderImage}
             loader={() => article.image}
             alt={article.title}
-            className="object-cover w-full h-48 md:h-full"
+            fill
+            className="object-cover"
           />
         </div>
         <div className="flex flex-col p-6 md:w-2/3">

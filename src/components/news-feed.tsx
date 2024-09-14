@@ -20,8 +20,8 @@ export default function NewsFeed() {
   if (isPending)
     return (
       <div className="flex flex-col gap-6 p-4">
-        {Array.from({ length: 4 }, (_, i) => (
-          <Skeleton key={`skeleton-${i + 1}`} className="h-44 w-full" />
+        {Array.from({ length: 2 }, (_, i) => (
+          <Skeleton key={`skeleton-${i + 1}`} className="h-64 w-full" />
         ))}
       </div>
     );
