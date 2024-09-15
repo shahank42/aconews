@@ -7,16 +7,6 @@ import { z } from "zod"
 import { Button } from "@/components/ui/button"
 import { useRouter, useSearchParams } from 'next/navigation'
 
-const categories = {
-  'General': 'general',
-  'Business': 'business',
-  'Entertainment': 'entertainment',
-  'Health': 'health',
-  'Science': 'science',
-  'Sports': 'sports',
-  'Technology': 'technology'
-}
-
 const languages = {
   Arabic: 'ar',
   Chinese: 'zh',
@@ -75,22 +65,21 @@ const countries = {
   'United States': 'us'
 }
 
-const filterFormSchema = z.object({
-  category: z.string().optional(),
+
+const searchFilterFormSchema = z.object({
   language: z.string().optional(),
   country: z.string().optional(),
 })
 
-export type FilterFormValues = z.infer<typeof filterFormSchema>
+export type SearchFilterFormValues = z.infer<typeof searchFilterFormSchema>
 
-export default function Filters() {
+export default function SearchFilters() {
   const router = useRouter()
   const urlSearchParams = useSearchParams()
 
-  const form = useForm<FilterFormValues>({
-    resolver: zodResolver(filterFormSchema),
+  const form = useForm<SearchFilterFormValues>({
+    resolver: zodResolver(searchFilterFormSchema),
     defaultValues: {
-      category: urlSearchParams.get('category') || "",
       language: urlSearchParams.get('language') || "",
       country: urlSearchParams.get('country') || "",
     },
@@ -101,22 +90,23 @@ export default function Filters() {
   useEffect(() => {
     const subscription = form.watch((value, { name, type }) => {
       const initialValues = {
-        category: urlSearchParams.get('category') || "",
         language: urlSearchParams.get('language') || "",
         country: urlSearchParams.get('country') || "",
       }
       const hasChanged = Object.keys(initialValues).some(
-        (key) => value[key as keyof FilterFormValues] !== initialValues[key as keyof FilterFormValues]
+        (key) => value[key as keyof SearchFilterFormValues] !== initialValues[key as keyof SearchFilterFormValues]
       )
       setIsFilterChanged(hasChanged)
     })
     return () => subscription.unsubscribe()
   }, [form, urlSearchParams])
 
-  function onSubmit(data: FilterFormValues) {
-    console.log("Applying filters:", data)
+  function onSubmit(data: SearchFilterFormValues) {
     setIsFilterChanged(false)
     const params = new URLSearchParams()
+    const searchQuery = urlSearchParams.get('query') || ""
+
+    params.set('query', searchQuery)
 
     for (const [key, value] of Object.entries(data)) {
       if (value !== "") {
@@ -127,12 +117,11 @@ export default function Filters() {
     const queryString = params.toString()
     console.log("Query string:", queryString)
 
-    router.push(`/?${queryString}`)
+    router.push(`/search?${queryString}`)
   }
-  function resetField(fieldName: keyof FilterFormValues) {
-    console.log("before resetting", form.getValues())
+
+  function resetField(fieldName: keyof SearchFilterFormValues) {
     form.setValue(fieldName, "")
-    console.log("after resetting", form.getValues())
     form.trigger(fieldName)
   }
 
@@ -140,33 +129,6 @@ export default function Filters() {
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-10">
         <div className="flex flex-col gap-4">
-          <FormField
-            control={form.control}
-            name="category"
-            render={({ field }) => (
-              <FormItem>
-                <div className="flex justify-between items-center">
-                  <FormLabel className="py-1.5">Category</FormLabel>
-                  {field.value && (
-                    <Button type="button" variant="destructive" onClick={() => resetField("category")} className="h-6 px-2 text-sm">Reset</Button>
-                  )}
-                </div>
-                <Select onValueChange={field.onChange} value={field.value}>
-                  <FormControl>
-                    <SelectTrigger className="py-1.5">
-                      <SelectValue placeholder="Select category" />
-                    </SelectTrigger>
-                  </FormControl>
-                  <SelectContent>
-                    {Object.entries(categories).map(([label, value]) => (
-                      <SelectItem key={value} value={value}>{label}</SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </FormItem>
-            )}
-          />
-
           <FormField
             control={form.control}
             name="country"

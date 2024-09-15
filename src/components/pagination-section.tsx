@@ -49,22 +49,15 @@ export function PaginationSection({
     [searchParams, pathname, pageSearchParam],
   );
 
-  // const navToPageSize = useCallback(
-  //   (newPageSize: number) => {
-  //     const key = pageSizeSelectOptions?.pageSizeSearchParam || "pageSize";
-  //     const newSearchParams = new URLSearchParams(searchParams || undefined);
-  //     newSearchParams.set(key, String(newPageSize));
-  //     router.push(`${pathname}?${newSearchParams.toString()}`);
-  //   },
-  //   [searchParams, pathname, pageSizeSelectOptions, router],
-  // );
-
-  const navToPageSize = (newPageSize: number) => {
-    const key = pageSizeSelectOptions?.pageSizeSearchParam || "pageSize";
-    const newSearchParams = new URLSearchParams(searchParams || undefined);
-    newSearchParams.set(key, String(newPageSize));
-    router.push(`${pathname}?${newSearchParams.toString()}`);
-  }
+  const navToPageSize = useCallback(
+    (newPageSize: number) => {
+      const key = pageSizeSelectOptions?.pageSizeSearchParam || "pageSize";
+      const newSearchParams = new URLSearchParams(searchParams || undefined);
+      newSearchParams.set(key, String(newPageSize));
+      router.push(`${pathname}?${newSearchParams.toString()}`);
+    },
+    [searchParams, pathname, pageSizeSelectOptions, router],
+  );
 
   const renderPageNumbers = () => {
     const items: ReactNode[] = [];
@@ -135,7 +128,7 @@ export function PaginationSection({
   }, [pageSize]);
 
   return (
-    <div className="flex flex-col md:flex-row items-center gap-3 w-full">
+    <div className="flex flex-col-reverse md:flex-row items-center gap-2 p-2 md:gap-3 w-full md:py-6">
       {pageSizeSelectOptions && (
         <div className="flex flex-col gap-4 flex-1">
           <SelectRowsPerPage

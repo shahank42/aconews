@@ -13,7 +13,7 @@ export type Article = {
 
 export type PaginatedArticles = {
 	articles: Article[];
-	totalArticles: number;
+	totalItems: number;
 	currentPage: number;
 	pageSize: number;
 	totalPages: number;

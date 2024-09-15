@@ -1,25 +1,24 @@
-"use client";
+"use client"
 
-import NewsCard from "@/components/news-card";
-import { keepPreviousData, useQuery } from "@tanstack/react-query";
-import type { PaginatedArticles } from "@/lib/types";
-import { useEffect, useState } from "react";
-import { Skeleton } from "@/components/ui/skeleton";
-import { PaginationSection } from "./pagination-section";
-import { fetchArticles } from "@/lib/fetchers";
-import { useSearchParams } from "next/navigation";
-import type { NewsFilterFormValues } from "./news-filters";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import { AlertCircle } from "lucide-react";
+import SearchCard from "@/components/search-card"
+import { searchArticles } from "@/lib/fetchers"
+import { useQuery } from "@tanstack/react-query"
+import { useSearchParams } from "next/navigation"
+import { ScrollArea } from "./ui/scroll-area"
+import { PaginationSection } from "./pagination-section"
+import { useEffect, useState } from "react"
+import { Skeleton } from "./ui/skeleton"
+import type { SearchFilterFormValues } from "./search-filters"
+import { AlertCircle } from "lucide-react"
 
-export default function NewsFeed() {
-  const searchParams = useSearchParams();
+export default function SearchFeed() {
+  const searchParams = useSearchParams()
+  const searchQuery = searchParams.get("query") || ""
   const [currentPage, setCurrentPage] = useState(Number(searchParams.get('page')) || 1);
   const [pageSize, setPageSize] = useState(Number(searchParams.get('pageSize')) || 4);
 
-  const [filters, setFilters] = useState<NewsFilterFormValues>(
+  const [filters, setFilters] = useState<SearchFilterFormValues>(
     {
-      category: searchParams.get('category') || "",
       language: searchParams.get('language') || "",
       country: searchParams.get('country') || "",
     }
@@ -29,22 +28,20 @@ export default function NewsFeed() {
     setPageSize(Number(searchParams.get('pageSize')) || 4);
     setCurrentPage(Number(searchParams.get('page')) || 1);
     setFilters({
-      category: searchParams.get('category') || "",
       language: searchParams.get('language') || "",
       country: searchParams.get('country') || "",
     });
   }, [searchParams]);
 
-  const { isPending, isError, data, error, isLoading } = useQuery({
-    queryKey: ['articles', currentPage, pageSize, filters],
-    queryFn: () => fetchArticles(currentPage, pageSize, filters),
-    // placeholderData: keepPreviousData,
+  const { data, isPending, isError, error, isLoading } = useQuery({
+    queryKey: ['search', searchQuery, currentPage, pageSize, filters],
+    queryFn: () => searchArticles(searchQuery, currentPage, pageSize, filters),
   })
 
   return (
     <div className="flex flex-col w-full">
       <div className="py-2 px-4 border-b border-border">
-        <h2 className="text-2xl font-semibold">Top Headlines</h2>
+        <h2 className="text-2xl font-semibold">Search Results for "{searchQuery}"</h2>
         {!isError ? (
           <p className="text-gray-400">
             {isPending
@@ -88,11 +85,11 @@ export default function NewsFeed() {
           <div className="flex flex-col gap-4 my-6">
             {isPending ? (
               [...Array(pageSize)].map((_, index) => (
-                <Skeleton key={`${index + 1}-skeleton`} className="w-full h-96 md:h-64" />
+                <Skeleton key={`${index + 1}-skeleton`} className="w-full h-96 md:h-48" />
               ))
             ) : (
               data.articles.map((article) => (
-                <NewsCard key={article.title} article={article} />
+                <SearchCard key={article.title} article={article} />
               ))
             )}
           </div>
@@ -109,5 +106,5 @@ export default function NewsFeed() {
         </ScrollArea>
       )}
     </div>
-  );
+  )
 }
