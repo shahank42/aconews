@@ -1,0 +1,66 @@
+[debug] [2024-09-15T11:08:03.979Z] ----------------------------------------------------------------------
+[debug] [2024-09-15T11:08:03.981Z] Command:       /usr/bin/node /home/shahank/.bun/bin/firebase deploy
+[debug] [2024-09-15T11:08:03.982Z] CLI Version:   13.17.0
+[debug] [2024-09-15T11:08:03.982Z] Platform:      linux
+[debug] [2024-09-15T11:08:03.982Z] Node Version:  v22.8.0
+[debug] [2024-09-15T11:08:03.982Z] Time:          Sun Sep 15 2024 16:38:03 GMT+0530 (India Standard Time)
+[debug] [2024-09-15T11:08:03.982Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2024-09-15T11:08:04.037Z] Object ".hosting" in "firebase.json" has unknown property: {"additionalProperty":"environment"}
+[debug] [2024-09-15T11:08:04.037Z] Field ".hosting" in "firebase.json" is possibly invalid: should be array
+[debug] [2024-09-15T11:08:04.037Z] Field ".hosting" in "firebase.json" is possibly invalid: should match some schema in anyOf
+[debug] [2024-09-15T11:08:04.041Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2024-09-15T11:08:04.041Z] > authorizing via signed-in user (shounakghosh42@gmail.com)
+[debug] [2024-09-15T11:08:04.041Z] [iam] checking project aconews-6e1e1 for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2024-09-15T11:08:04.042Z] > refreshing access token with scopes: []
+[debug] [2024-09-15T11:08:04.047Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2024-09-15T11:08:04.047Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2024-09-15T11:08:04.596Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
+[debug] [2024-09-15T11:08:04.596Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2024-09-15T11:08:04.610Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/aconews-6e1e1:testIamPermissions [none]
+[debug] [2024-09-15T11:08:04.610Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/aconews-6e1e1:testIamPermissions x-goog-quota-user=projects/aconews-6e1e1
+[debug] [2024-09-15T11:08:04.610Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/aconews-6e1e1:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2024-09-15T11:08:06.422Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/aconews-6e1e1:testIamPermissions 200
+[debug] [2024-09-15T11:08:06.422Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/aconews-6e1e1:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2024-09-15T11:08:06.423Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/aconews-6e1e1 [none]
+[debug] [2024-09-15T11:08:07.129Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/aconews-6e1e1 200
+[debug] [2024-09-15T11:08:07.129Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/aconews-6e1e1 {"projectId":"aconews-6e1e1","projectNumber":"150912756271","displayName":"aconews","name":"projects/aconews-6e1e1","resources":{"hostingSite":"aconews-6e1e1"},"state":"ACTIVE","etag":"1_ed65bed3-f708-4df0-9049-d55e1bbed9d2"}
+[info] 
+   Thank you for trying our early preview of Next.js support on Firebase Hosting.
+   During the preview, support is best-effort and breaking changes can be expected. Proceed with caution.
+   The integration is known to work with Next.js version 12 - 14.0. You may encounter errors.
+
+   Documentation: https://firebase.google.com/docs/hosting/frameworks/nextjs
+   File a bug: https://github.com/firebase/firebase-tools/issues/new?template=bug_report.md
+   Submit a feature request: https://github.com/firebase/firebase-tools/issues/new?template=feature_request.md
+
+   We'd love to learn from you. Express your interest in helping us shape the future of Firebase Hosting: https://goo.gle/41enW5X
+
+[debug] [2024-09-15T11:08:13.152Z] >>> [apiv2][query] GET https://firebasehosting.googleapis.com/v1beta1/projects/aconews-6e1e1/sites/aconews-6e1e1 [none]
+[debug] [2024-09-15T11:08:14.616Z] <<< [apiv2][status] GET https://firebasehosting.googleapis.com/v1beta1/projects/aconews-6e1e1/sites/aconews-6e1e1 200
+[debug] [2024-09-15T11:08:14.616Z] <<< [apiv2][body] GET https://firebasehosting.googleapis.com/v1beta1/projects/aconews-6e1e1/sites/aconews-6e1e1 {"name":"projects/aconews-6e1e1/sites/aconews-6e1e1","defaultUrl":"https://aconews-6e1e1.web.app","type":"DEFAULT_SITE"}
+[info]   ▲ Next.js 14.2.11
+
+[info]   - Environments: .env
+  - Experiments (use with caution):
+    · missingSuspenseWithCSRBailout
+
+
+[info]    Creating an optimized production build ...
+
+[info]  ✓ Compiled successfully
+
+[info]    Linting and checking validity of types ...
+
+[info] 
+Failed to compile.
+
+[info] 
+./src/components/news-card.tsx
+5:10  Error: 'Button' is defined but never used.  @typescript-eslint/no-unused-vars
+
+info  - Need to disable some ESLint rules? Learn more here: https://nextjs.org/docs/basic-features/eslint#disabling-rules
+
+[debug] [2024-09-15T11:08:26.812Z] Error: ENOENT: no such file or directory, open '/home/shahank/workspace/projs/aconews/.next/export-marker.json'
+[error] 
+[error] Error: An unexpected error has occurred.
