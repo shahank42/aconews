@@ -14,7 +14,7 @@ export default function SearchSidebar() {
       <div className="flex px-4 md:hidden">
         <Sheet open={mobileFiltersOpen} onOpenChange={setMobileFiltersOpen}>
           <SheetTrigger asChild>
-            <Button variant="outline" className="flex items-center justify-center w-full">
+            <Button variant="outline" className="flex sticky top-[88px] items-center justify-center w-full">
               <Menu className="w-4 h-4 mr-2" /> Filters Sidebar
             </Button>
           </SheetTrigger>
