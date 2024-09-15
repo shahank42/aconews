@@ -1,8 +1,7 @@
 "use client";
 
 import NewsCard from "@/components/news-card";
-import { keepPreviousData, useQuery } from "@tanstack/react-query";
-import type { PaginatedArticles } from "@/lib/types";
+import { useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
 import { PaginationSection } from "./pagination-section";
@@ -35,10 +34,9 @@ export default function NewsFeed() {
     });
   }, [searchParams]);
 
-  const { isPending, isError, data, error, isLoading } = useQuery({
+  const { isPending, isError, data } = useQuery({
     queryKey: ['articles', currentPage, pageSize, filters],
     queryFn: () => fetchArticles(currentPage, pageSize, filters),
-    // placeholderData: keepPreviousData,
   })
 
   return (
@@ -75,7 +73,7 @@ export default function NewsFeed() {
             </div>
             <h2 className="text-3xl font-bold mb-4">Oops! Something went wrong</h2>
             <p className="text-muted-foreground mb-6">
-              We couldn't fetch the articles from the server. This might be due to a network issue or a problem on our end.
+              We couldn&apos;t fetch the articles from the server. This might be due to a network issue or a problem on our end.
             </p>
             <div className="flex items-center justify-center space-x-2 mb-6">
               <AlertCircle className="h-5 w-5 text-destructive" />

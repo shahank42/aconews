@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { Form, FormControl, FormField, FormItem, FormLabel } from "@/components/ui/form"
 import { useForm } from "react-hook-form"
@@ -99,7 +99,7 @@ export default function NewsFilters() {
   const [isFilterChanged, setIsFilterChanged] = useState(false)
 
   useEffect(() => {
-    const subscription = form.watch((value, { name, type }) => {
+    const subscription = form.watch((value) => {
       const initialValues = {
         category: urlSearchParams.get('category') || "",
         language: urlSearchParams.get('language') || "",

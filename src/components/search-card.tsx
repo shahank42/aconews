@@ -1,6 +1,6 @@
 import React from 'react'
 import { Card, CardContent } from '@/components/ui/card'
-import { Calendar, Clock } from 'lucide-react'
+import { Clock } from 'lucide-react'
 import type { Article } from '@/lib/types'
 import Image from 'next/image'
 import placeholderImage from "../../public/placeholder.svg"

@@ -1,13 +1,12 @@
 {
-  "hosting": {
-    "source": ".",
-    "ignore": [
-      "firebase.json",
-      "**/.*",
-      "**/node_modules/**"
-    ],
-    "frameworksBackend": {
-      "region": "asia-east1"
-    }
-  }
+	"hosting": {
+		"source": ".",
+		"ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+		"frameworksBackend": {
+			"region": "asia-east1"
+		},
+		"environment": {
+			"NEXT_PUBLIC_BACKEND_URL": "https://aconews-backend.shounakghosh42.workers.dev"
+		}
+	}
 }

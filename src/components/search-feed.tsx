@@ -33,7 +33,7 @@ export default function SearchFeed() {
     });
   }, [searchParams]);
 
-  const { data, isPending, isError, error, isLoading } = useQuery({
+  const { data, isPending, isError } = useQuery({
     queryKey: ['search', searchQuery, currentPage, pageSize, filters],
     queryFn: () => searchArticles(searchQuery, currentPage, pageSize, filters),
   })
@@ -41,7 +41,7 @@ export default function SearchFeed() {
   return (
     <div className="flex flex-col w-full">
       <div className="py-2 px-4 border-b border-border">
-        <h2 className="text-2xl font-semibold">Search Results for "{searchQuery}"</h2>
+        <h2 className="text-2xl font-semibold">Search Results for &quot;{searchQuery}&quot;</h2>
         {!isError ? (
           <p className="text-gray-400">
             {isPending
@@ -72,7 +72,7 @@ export default function SearchFeed() {
             </div>
             <h2 className="text-3xl font-bold mb-4">Oops! Something went wrong</h2>
             <p className="text-muted-foreground mb-6">
-              We couldn't fetch the articles from the server. This might be due to a network issue or a problem on our end.
+              We couldn&apos;t fetch the articles from the server. This might be due to a network issue or a problem on our end.
             </p>
             <div className="flex items-center justify-center space-x-2 mb-6">
               <AlertCircle className="h-5 w-5 text-destructive" />
