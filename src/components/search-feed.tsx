@@ -81,7 +81,7 @@ export default function SearchFeed() {
           </div>
         </div>
       ) : (
-        <ScrollArea className="w-full h-[calc(100dvh-88px-61px-97px)] md:h-[calc(100dvh-68px-73px-1px)] px-4 py-0 flex flex-col gap-4">
+        <ScrollArea className="w-full h-[calc(100dvh-88px-61px-73px)] md:h-[calc(100dvh-68px-73px-1px)] px-4 py-0 flex flex-col gap-4">
           <div className="flex flex-col gap-4 my-6">
             {isPending ? (
               [...Array(pageSize)].map((_, index) => (
