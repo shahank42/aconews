@@ -82,10 +82,10 @@ export default function SearchFeed() {
         </div>
       ) : (
         <ScrollArea className="w-full h-[calc(100dvh-88px-61px-73px)] md:h-[calc(100dvh-68px-73px-1px)] px-4 py-0 flex flex-col gap-4">
-          <div className="flex flex-col gap-4 my-6">
+          <div className="flex flex-col gap-8 my-6 lg:px-12">
             {isPending ? (
               [...Array(pageSize)].map((_, index) => (
-                <Skeleton key={`${index + 1}-skeleton`} className="w-full h-96 md:h-48" />
+                <Skeleton key={`${index + 1}-skeleton`} className="w-full h-96 md:h-48 rounded-3xl" />
               ))
             ) : (
               data.articles.map((article) => (
