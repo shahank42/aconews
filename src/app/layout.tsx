@@ -35,9 +35,11 @@ export default function RootLayout({
         )}
       >
         <Providers>
-          <main className="relative flex flex-col min-h-screen font-outfit">
+          <main className="relative flex flex-col min-h-[calc(100dvh)] font-outfit">
             <Navbar />
-            <div className="flex-1 flex-grow h-full">{children}</div>
+            <div className="flex-1 flex-grow h-[calc(100dvh-88px) md:h-[calc(100dvh-68px)]">
+              {children}
+            </div>
           </main>
         </Providers>
 
