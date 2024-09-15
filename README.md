@@ -1,36 +1,75 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# aconews - Never miss a beat
+
+aconews is a modern news aggregator built with Next.js, React, and Tailwind CSS. It provides users with a seamless experience to stay updated on the latest news across various categories.
+
+## Features
+
+- Responsive design for desktop and mobile devices
+- Dynamic news fetching from multiple sources
+- Advanced search functionality with filters
+- Customizable user interface with light and dark modes
+- Efficient performance with server-side rendering
+
+## Tech Stack
+
+- Next.js
+- React
+- Tailwind CSS
+- TypeScript
+- shadcn/ui
+- Tanstack Query
 
 ## Getting Started
 
-First, run the development server:
+1. Clone the client-side repository:
+   ```
+   git clone https://github.com/shahank42/aconews.git
+   ```
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+2. Install dependencies:
+   ```
+   cd aconews
+   bun install
+   ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+3. Set up environment variables:
+   Create a `.env` file in the root directory and add:
+   ```
+   NEXT_PUBLIC_BACKEND_URL=http://localhost:8787
+   ```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+4. Run the development server:
+   ```
+   bun run dev
+   ```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+5. Clone the backend-repository:
+   ```
+   cd ..
+   git clone https://github.com/shahank42/aconews-backend
+   ```
 
-## Learn More
+6. Install dependencies:
+   ```
+   cd aconews-backend
+   bun install
+   ```
+7. Set up environment variables:
+   Create a `.dev.vars` file in the root directory and add:
+   ```
+   GNEWS_API_KEY=<YOUR_API_KEY>
+   ```
+8. Run the development server:
+   ```
+   bun run dev
+   ```
+9. Open [http://localhost:3000](http://localhost:3000) in your browser to see the application.
 
-To learn more about Next.js, take a look at the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Contributing
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Contributions are welcome! Please feel free to submit a Pull Request.
 
-## Deploy on Vercel
+## License
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+This project is open source and available under the [MIT License](LICENSE).
